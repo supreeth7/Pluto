@@ -3,7 +3,7 @@
   <a href="https://gamet-in.000webhostapp.com/"><img src="/assets/icons/pluto-default-logo.png?raw=true" alt="Gamet" width="200"></a>
 </h1>
 
-<h4 align="center">An API service that performs hotel check-in use-case targetted functionalities and synchronizes databases. Built with<a href="https://www.php.net/" target="_blank"> PHP</a>.</h4>
+<h4 align="center">An API service that performs hotel check-in use-case targetted functionalities and synchronizes databases. <br>Built with<a href="https://www.php.net/" target="_blank"> PHP</a>.</h4>
 
 <div align="center">
 
