@@ -6,10 +6,10 @@ class Response
     private $success;
     private $data;
     private $messages = array();
-    private $is_cache = false;
+    private $is_cache;
     private $response_data = array();
 
-    public function __construct($status_code, $success, $data, $message, $is_cache)
+    public function __construct($status_code, $success, $data, $message, $is_cache = false)
     {
         $this->setStatusCode($status_code);
         $this->setSuccess($success);

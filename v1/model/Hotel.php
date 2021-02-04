@@ -1,5 +1,7 @@
 <?php
 
+require_once 'model/HotelException.php';
+
 class Hotel
 {
     private $id;
@@ -10,25 +12,23 @@ class Hotel
     private $address;
     private $username;
     private $password;
-    private $is_active;
-    private $login_attempts;
 
     public function __construct($id, $property_name, $property_type, $city, $country, $address, $username, $password)
     {
         $this->setId($id);
+        $this->setUsername($username);
+        $this->setPassword($password);
         $this->setPropertyName($property_name);
         $this->setPropertyType($property_type);
         $this->setCity($city);
         $this->setCountry($country);
         $this->setAddress($address);
-        $this->setUsername($username);
-        $this->setPassword($password);
     }
 
-    public function validateInputText($input)
+    public function validateInputText($input, $message)
     {
-        if (($input !==null) && (strlen($input) < 1 || strlen($input) > 255)) {
-            throw new Exception('Invalid Data: ' . $input);
+        if ((isset($input) && $input !==null) && (strlen($input) < 1 || strlen($input) > 255)) {
+            throw new HotelException('Invalid Data: ' . $message);
         }
 
         $input = strip_tags($input);
@@ -43,7 +43,7 @@ class Hotel
     public function setId($id)
     {
         if (($id != null) && ($id == '' || !is_numeric($id))) {
-            throw new Exception('Invalid Hotel ID');
+            throw new HotelException('Invalid Hotel ID');
         }
 
         $this->id = $id;
@@ -51,7 +51,7 @@ class Hotel
 
     public function setPropertyName($name)
     {
-        $this->property_name = $this->validateInputText($name);
+        $this->property_name = $this->validateInputText($name, 'Property name error.');
     }
 
     public function getPropertyName()
@@ -61,9 +61,16 @@ class Hotel
 
     public function setPropertyType($type)
     {
+        $properties = [
+            "STAR HOTEL",
+            "LODGING",
+            "INN",
+            "RESORT",
+            "HOMESTAY"
+        ];
         $type = strtoupper($type);
-        if (($type !== null) && ($type !== 'STAR HOTEL' || $type !== 'LODGING' || $type !== 'INN' || $type !== 'RESORT' || $type !== 'HOMESTAY')) {
-            throw new Exception('Invalid Property Type: ' . $type);
+        if (($type !== null) && (!in_array($type, $properties))) {
+            throw new HotelException('Invalid Property Type: ' . $type);
         }
 
         $this->property_type = $type;
@@ -76,7 +83,7 @@ class Hotel
 
     public function setCity($city)
     {
-        $this->city = $this->validateInputText($city);
+        $this->city = $this->validateInputText($city, 'City is invalid.');
     }
 
     public function getCity()
@@ -86,7 +93,7 @@ class Hotel
 
     public function setCountry($country)
     {
-        $this->country = $this->validateInputText($country);
+        $this->country = $this->validateInputText($country, 'Country is invalid.');
     }
 
     public function getCountry()
@@ -96,7 +103,7 @@ class Hotel
 
     public function setAddress($address)
     {
-        $this->address = $this->validateInputText($address);
+        $this->address = $this->validateInputText($address, 'Address is invalid.');
     }
 
     public function getAddress()
@@ -107,7 +114,7 @@ class Hotel
     public function setUsername($username)
     {
         $username = trim($username);
-        $this->username = $this->validateInputText($username);
+        $this->username = $this->validateInputText($username, 'Username is invalid.');
     }
 
     public function getUsername()
@@ -117,35 +124,7 @@ class Hotel
 
     public function setPassword($password)
     {
-        $this->password = $this->validateInputText($password);
-    }
-    
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function setLoginAttempts($login_attempts)
-    {
-        $this->login_attempts = $login_attempts;
-    }
-
-    public function getLoginAttempts()
-    {
-        return $this->login_attempts;
-    }
-
-    public function setActive($status)
-    {
-        if (($status !== null) && ($status !== 0 || $status !== 1)) {
-            throw new Exception('Invalid User Status');
-        }
-        $this->is_active = $status;
-    }
-
-    public function getActive()
-    {
-        return $this->is_active;
+        $this->password = $this->validateInputText($password, 'Password is invalid.');
     }
 
     public function returnHotelArray()
@@ -158,9 +137,6 @@ class Hotel
         $hotel['country'] = $this->getCountry();
         $hotel['address'] = $this->getAddress();
         $hotel['username'] = $this->getUsername();
-        $hotel['password'] = $this->getPassword();
-        $hotel['is_active'] = $this->getActive();
-        $hotel['login_attempts'] = $this->getLoginAttempts();
 
         return $hotel;
     }
