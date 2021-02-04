@@ -6,4 +6,6 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
-RewriteRule ^users$ user.php [L]
+RewriteRule ^users$ userHandler.php [L]
+
+RewriteRule ^sessions$ sessionsHandler.php [L]
