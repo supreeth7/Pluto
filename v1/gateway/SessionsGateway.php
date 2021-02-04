@@ -120,4 +120,134 @@ class SessionsGateway
             $response->send();
         }
     }
+
+    //Logout
+    public function delete($session_id, $access_token)
+    {
+        try {
+            $query = "DELETE FROM sessions WHERE id = :id AND access_token = :access_token";
+            $stmt = $this->writeDB->prepare($query);
+            $stmt->bindParam(':id', $session_id);
+            $stmt->bindParam(':access_token', $access_token);
+            $stmt->execute();
+
+            $count = $stmt->rowCount();
+
+            if ($count == 0) {
+                $response =  new Response(404, false, null, 'Failed to logout.');
+                $response->send();
+            }
+
+            $data['session_id'] = $session_id;
+
+            $response =  new Response(200, true, $data, 'Successfully logged out.');
+            $response->send();
+        } catch (PDOException $e) {
+            $response = new Response(500, false, null, 'There was an error logging out.');
+            $response->send();
+        }
+    }
+
+    //Refresh token
+    public function update($session_id, $access_token)
+    {
+        $rawData = file_get_contents('php://input');
+
+        if (!$jsonData = json_decode($rawData)) {
+            $response = new Response(400, false, null, 'Data not valid JSON.');
+            $response->send();
+        }
+
+        if (!isset($jsonData->refresh_token) || strlen($jsonData->refresh_token) < 1) {
+            $response = new Response(400, false, null, 'Invalid refresh token.');
+            $response->send();
+        }
+
+        $refresh_token = $jsonData->refresh_token;
+
+        try {
+            $query = "SELECT sessions.id as session_id, hotels.id as user_id, 
+            access_token, refresh_token, refresh_token_expiry, is_active, login_attempts
+            FROM sessions, hotels WHERE hotels.id = sessions.user_id AND sessions.id = :session_id
+            AND sessions.access_token = :access_token AND sessions.refresh_token = :refresh_token";
+            $stmt = $this->writeDB->prepare($query);
+            $stmt->bindParam(':session_id', $session_id);
+            $stmt->bindParam(':access_token', $access_token);
+            $stmt->bindParam(':refresh_token', $refresh_token);
+            $stmt->execute();
+
+            $count = $stmt->rowCount();
+
+            if ($count == 0) {
+                $response = new Response(404, false, null, 'Access Token/Refresh Token is incorrect for the given session ID.');
+                $response->send();
+            }
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $returned_user_id = $row['user_id'];
+            $returned_session_id = $row['session_id'];
+            $returned_status = $row['is_active'];
+            $returned_login_attempts = $row['login_attempts'];
+            $returned_access_token = $row['access_token'];
+            $returned_refresh_token = $row['refresh_token'];
+            $returned_refresh_token_expiry = $row['refresh_token_expiry'];
+
+            if (!$returned_status) {
+                $response =  new Response(401, false, null, 'User account is inactive.');
+                $response->send();
+            }
+
+            if ($returned_login_attempts >= 3) {
+                $response =  new Response(401, false, null, 'Account locked due to too many login attempts.');
+                $response->send();
+            }
+
+            if (strtotime($returned_refresh_token_expiry) < time()) {
+                $response =  new Response(401, false, null, 'Refresh token expired. Please login again.');
+                $response->send();
+            }
+
+            $access_token = base64_encode(bin2hex(openssl_random_pseudo_bytes(24)).time());
+            $refresh_token = base64_encode(bin2hex(openssl_random_pseudo_bytes(24)).time());
+
+            $refresh_token_expiry = 604800;
+            $access_token_expiry = 1200;
+
+            $query = "UPDATE sessions SET access_token = :access_token, refresh_token = :refresh_token, 
+            access_token_expiry = date_add(NOW(), INTERVAL :access_token_expiry SECOND), 
+            refresh_token_expiry = date_add(NOW(), INTERVAL :refresh_token_expiry SECOND)
+            WHERE user_id = :user_id AND id = :session_id AND access_token = :r_access_token AND refresh_token = :r_refresh_token";
+            $stmt = $this->writeDB->prepare($query);
+            $stmt->bindParam(':user_id', $returned_user_id);
+            $stmt->bindParam(':session_id', $returned_session_id);
+            $stmt->bindParam(':access_token', $access_token);
+            $stmt->bindParam(':refresh_token', $refresh_token);
+            $stmt->bindParam(':access_token_expiry', $access_token_expiry);
+            $stmt->bindParam(':refresh_token_expiry', $refresh_token_expiry);
+            $stmt->bindParam(':r_refresh_token', $returned_refresh_token);
+            $stmt->bindParam(':r_access_token', $returned_access_token);
+            $stmt->execute();
+
+
+            $rowCount = $stmt->rowCount();
+
+            if ($rowCount == 0) {
+                $response = new Response(404, false, null, 'Access Token could not be refreshed. Please login again.');
+            }
+
+            $data['session_id'] = $returned_session_id;
+            $data['user_id'] = $returned_user_id;
+            $data['access_token'] = $access_token;
+            $data['access_token_expiry'] = $access_token_expiry;
+            $data['refresh_token'] = $refresh_token;
+            $data['refresh_token_expiry'] = $refresh_token_expiry;
+
+            $response =  new Response(200, true, $data, 'Token refreshed.');
+            $response->send();
+        } catch (PDOException $e) {
+            $response = new Response(500, false, null, 'There was an error updating the session.' . $e->getMessage());
+            $response->send();
+        }
+    }
 }
