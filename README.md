@@ -169,7 +169,7 @@
 ## Credits
 
 * API testing done via [Postman](https://www.postman.com)
-* Databased used: [MySQL](https://www.mysql.com/)
+* Databased used: [MySQL](https://www.mysql.com/) hosted via [Clever Cloud](https://www.clever-cloud.com/en/)
 
 <br>
 
