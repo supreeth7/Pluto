@@ -17,8 +17,8 @@
 <div>
   
 <p align="center">
-  <a href="#API Architecture">Architecture</a> •
-  <a href="#Token Based Authentication Flow">Token Based Authentication</a> •
+  <a href="#api-architecture">Architecture</a> •
+  <a href="#token-based-authentication-flow">Token Based Authentication</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#Demo">Demo</a> •
   <a href="#credits">Credits</a> •
@@ -32,7 +32,6 @@
 ## API Architecture
 ![alt text](https://www.dropbox.com/s/oyd2csndgj0etok/Pluto.png?raw=true)
 
-<br>
 
 ## Token Based Authentication Flow
 
@@ -122,6 +121,8 @@
 </tr>
 </tbody>
 </table>
+
+<br>
 
 ## Key Features
 * Robust API developed using only pure PHP.
