@@ -15,7 +15,7 @@ class HotelController
     public function processRequest()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $response = new Response(405, false, null, 'Method Not Allowed.');
+            $response = new Response(405, false, null, 'Method Not Allowed.', false);
             $response->send();
         }
 

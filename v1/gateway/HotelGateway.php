@@ -12,7 +12,7 @@ class HotelGateway
         try {
             $this->writeDB = Database::connectWriteDatabase();
         } catch (PDOException $e) {
-            $response =  new Response(500, false, null, 'Internal Server Error.');
+            $response =  new Response(500, false, null, 'Internal Server Error.', false);
             $response->send();
         }
     }
@@ -23,7 +23,7 @@ class HotelGateway
         $rawData = file_get_contents('php://input');
 
         if (!$jsonData = json_decode($rawData)) {
-            $response =  new Response(400, false, null, 'Content type not valid JSON.');
+            $response =  new Response(400, false, null, 'Content type not valid JSON.', false);
             $response->send();
         }
 
@@ -37,7 +37,7 @@ class HotelGateway
             !isset($jsonData->country) ||
             !isset($jsonData->address)
             ) {
-                $response =  new Response(400, false, null, 'Missing fields:');
+                $response =  new Response(400, false, null, 'Missing fields:', false);
                 !isset($jsonData->username) ? $response->addMessage('Username should be provided.') : null;
                 !isset($jsonData->password) ? $response->addMessage('Password should be provided.') : null;
                 !isset($jsonData->property_name) ? $response->addMessage('Property name should be provided.') : null;
@@ -75,7 +75,7 @@ class HotelGateway
             $rowCount = $stmt->rowCount();
 
             if ($rowCount !== 0) {
-                $response =  new Response(409, false, null, 'Username already exists.');
+                $response =  new Response(409, false, null, 'Username already exists.', false);
                 $response->send();
             }
 
@@ -95,20 +95,20 @@ class HotelGateway
             $rowCount = $stmt->rowCount();
 
             if ($rowCount == 0) {
-                $response =  new Response(500, false, null, 'There was an error inserting the data into the database.');
+                $response =  new Response(500, false, null, 'There was an error inserting the data into the database.', false);
                 $response->send();
             }
 
             $hotel->setId($this->writeDB->lastInsertId());
             $data = $hotel->returnHotelArray();
 
-            $response = new Response(201, true, $data, 'User created.');
+            $response = new Response(201, true, $data, 'User created.', false);
             $response->send();
         } catch (PDOException $e) {
-            $response =  new Response(500, false, null, 'Internal Server Error.');
+            $response =  new Response(500, false, null, 'Internal Server Error.', false);
             $response->send();
         } catch (HotelException $e) {
-            $response =  new Response(500, false, null, $e->getMessage());
+            $response =  new Response(500, false, null, $e->getMessage(), false);
             $response->send();
         }
     }
