@@ -20,7 +20,7 @@
 
 ## API Architecture
 
-![screenshot](https://1drv.ms/u/s!Amx-xQjCERyrgZIkcwo5oF-Pg9YvYA?e=7LmwkJ)
+![alt text](https://y91l7q.ch.files.1drv.com/y4pZOiC3AgLeJwUL4nEvPiVN02bINZI3kmrcGxyUoaqB3P-ro-ljNBGem7PQ9z4RweCB3jz6sTrzfza0fcsiAWzMLzUON1A1YNS0jtS4hxYJo0Gdqw422Kcc1Nt_W3P1z3j8zAR_C_ujUd9YpYuwfayoiLP5wXCD6RCsONyShNRpxGGxXdy0Jy96R5vb-QAxWKRD5lRxvXoxLNzZCnM4paHNw/Pluto.png?psid=1)
 
 ## Key Features
 * A full fledged video game e-commerce prototype.
