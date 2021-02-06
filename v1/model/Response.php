@@ -9,7 +9,7 @@ class Response
     private $is_cache;
     private $response_data = array();
 
-    public function __construct($status_code, $success, $data, $message, $is_cache = false)
+    public function __construct($status_code, $success, $data, $message, $is_cache)
     {
         $this->setStatusCode($status_code);
         $this->setSuccess($success);

@@ -17,7 +17,7 @@ class RoomController
     {
         //Authorization check
         if (!isset($_SERVER['HTTP_AUTHORIZATION']) || strlen($_SERVER['HTTP_AUTHORIZATION']) < 1) {
-            $response = new Response(401, false, null, 'Unauthorized Access. Access Token Missing.');
+            $response = new Response(401, false, null, 'Unauthorized Access. Access Token Missing.', false);
             $response->send();
         }
 
@@ -28,7 +28,7 @@ class RoomController
         //Get record matching {id}
         if (array_key_exists("room_id", $_GET)) {
             if ($_GET['room_id'] !== null && (!is_numeric($_GET['room_id']) || $_GET['room_id'] == '')) {
-                $response = new Response(400, false, null, 'Invalid Room ID.');
+                $response = new Response(400, false, null, 'Invalid Room ID.', false);
                 $response->send();
             }
 
@@ -43,13 +43,41 @@ class RoomController
             elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
                 $this->gateway->delete($room_id, $user_id);
             }
+
+            //Update single record
+            elseif ($_SERVER['REQUEST_METHOD'] === 'PUT' || $_SERVER['REQUEST_METHOD'] === 'PATCH') {
+                $this->gateway->update($room_id, $user_id);
+            }
             
             //404
             else {
-                $response = new Response(405, false, null, 'Request method not allowed.');
+                $response = new Response(405, false, null, 'Request method not allowed.', false);
                 $response->send();
             }
         }
+        
+        
+        //Get records per status
+        elseif (array_key_exists("status", $_GET)) {
+            if ($_GET["status"]!== null && $_GET["status"] !== "Y" && $_GET["status"] !== "N") {
+                $response = new Response(405, false, null, 'Request method not allowed. Invalid status.', false);
+                $response->send();
+            }
+
+            $status = $_GET["status"];
+
+            //Get records as per status
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $this->gateway->showAvailable($status, $user_id);
+            }
+            
+            //404
+            else {
+                $response = new Response(405, false, null, 'Request method not allowed.', false);
+                $response->send();
+            }
+        }
+        
         
         //Get all, POST
         elseif (empty($_GET)) {
@@ -61,15 +89,19 @@ class RoomController
             
             //Create new record
             elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $this->gateway->create($user_id);
             }
 
             //404
             else {
-                $response = new Response(405, false, null, 'Request method not allowed.');
+                $response = new Response(405, false, null, 'Request method not allowed.', false);
                 $response->send();
             }
-        } else {
-            $response = new Response(405, false, null, 'Request method not allowed.');
+        }
+        
+        //404
+        else {
+            $response = new Response(405, false, null, 'Request method not allowed.', false);
             $response->send();
         }
     }

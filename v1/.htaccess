@@ -8,8 +8,10 @@ RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteRule ^users$ userHandler.php [L]
 
-RewriteRule ^sessions$ sessionsHandler.php [L]
 RewriteRule ^sessions/([0-9]+)$ sessionsHandler.php?session_id=$1 [L]
+RewriteRule ^sessions$ sessionsHandler.php [L]
 
-RewriteRule ^rooms$ roomsHandler.php [L]
 RewriteRule ^rooms/([0-9]+)$ roomsHandler.php?room_id=$1 [L]
+RewriteRule ^rooms/available$ roomsHandler.php?status=Y [L]
+RewriteRule ^rooms/unavailable$ roomsHandler.php?status=N [L]
+RewriteRule ^rooms$ roomsHandler.php [L]

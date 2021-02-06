@@ -75,6 +75,8 @@ class Room
             "STUDIO"
         ];
 
+        $type = strtoupper($type);
+
         if (($type !== null) && (!in_array($type, $room_types))) {
             throw new RoomException('Invalid room type.');
         }
@@ -139,6 +141,12 @@ class Room
         return $this->photos;
     }
 
+    public function getPhotosString()
+    {
+        $photos_string = implode(', ', $this->photos);
+        return $photos_string;
+    }
+
     public function setOccupancy($adults, $children)
     {
         if (($adults !== null && $children !== null) && (!is_numeric($adults) && !is_numeric($children))) {
@@ -150,6 +158,24 @@ class Room
             "max-children" => $children,
             "max-occupancy" => $adults + $children
         ];
+    }
+
+    public function setAdultOccupancy($input)
+    {
+        if (($input !== null) && (!is_numeric($input))) {
+            throw new RoomException('Occupants details must be a number.');
+        }
+
+        $this->occupancy["max_adults"] = $input;
+    }
+
+    public function setChildrenOccupancy($input)
+    {
+        if (($input !== null) && (!is_numeric($input))) {
+            throw new RoomException('Occupants details must be a number.');
+        }
+
+        $this->occupancy["max_children"] = $input;
     }
 
     public function getOccupancy()
@@ -190,6 +216,7 @@ class Room
         $room = array();
         $room['id'] = $this->getId();
         $room['hotel_id'] = $this->getHotelID();
+        $room['room_number'] = $this->getNumber();
         $room['type'] = $this->getType();
         $room['description'] = $this->getDescription();
         $room['price'] = $this->getPrice();

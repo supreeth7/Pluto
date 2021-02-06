@@ -11,7 +11,7 @@ class SessionsGateway
         try {
             $this->writeDB = Database::connectWriteDatabase();
         } catch (PDOException $e) {
-            $response = new Response(500, false, null, 'Database error.');
+            $response = new Response(500, false, null, 'Database error.', false);
             $response->send();
         }
     }
@@ -22,12 +22,12 @@ class SessionsGateway
         $inputData = file_get_contents('php://input');
 
         if (!$jsonData = json_decode($inputData)) {
-            $response = new Response(400, false, null, 'Data not valid JSON.');
+            $response = new Response(400, false, null, 'Data not valid JSON.', false);
             $response->send();
         }
 
         if (!isset($jsonData->username) || !isset($jsonData->password)) {
-            $response = new Response(400, false, null, 'Missing credentials.');
+            $response = new Response(400, false, null, 'Missing credentials.', false);
             !isset($jsonData->username) ? $response->addMessage('Username not provided.') : null;
             !isset($jsonData->password) ? $response->addMessage('Password not provided.') : null;
             $response->send();
@@ -45,7 +45,7 @@ class SessionsGateway
             $count = $stmt->rowCount();
 
             if ($count==0) {
-                $response = new Response(401, false, null, 'Username does not exist.');
+                $response = new Response(401, false, null, 'Username does not exist.', false);
                 $response->send();
             }
 
@@ -56,12 +56,12 @@ class SessionsGateway
             $returned_login_attempts = $row['login_attempts'];
 
             if (!$returned_status) {
-                $response =  new Response(401, false, null, 'User account is inactive.');
+                $response =  new Response(401, false, null, 'User account is inactive.', false);
                 $response->send();
             }
 
             if ($returned_login_attempts >= 3) {
-                $response =  new Response(401, false, null, 'Account locked due to too many login attempts.');
+                $response =  new Response(401, false, null, 'Account locked due to too many login attempts.', false);
                 $response->send();
             }
 
@@ -71,7 +71,7 @@ class SessionsGateway
                 $stmt->bindParam(':id', $returned_id, PDO::PARAM_INT);
                 $stmt->execute();
 
-                $response = new Response(401, false, null, 'Incorrect password.');
+                $response = new Response(401, false, null, 'Incorrect password.', false);
                 $response->send();
             }
 
@@ -108,15 +108,15 @@ class SessionsGateway
                 $data['refresh_token'] = $refresh_token;
                 $data['refresh_token_expiry'] = $refresh_token_expiry;
 
-                $response =  new Response(201, true, $data, 'Successfully logged in.');
+                $response =  new Response(201, true, $data, 'Successfully logged in.', false);
                 $response->send();
             } catch (PDOException $e) {
                 $this->writeDB->rollback();
-                $response = new Response(500, false, null, 'There was an error logging in. ' . $e->getMessage());
+                $response = new Response(500, false, null, 'There was an error logging in. ' . $e->getMessage(), false);
                 $response->send();
             }
         } catch (PDOException $e) {
-            $response = new Response(500, false, null, 'There was an error creating session.');
+            $response = new Response(500, false, null, 'There was an error creating session.', false);
             $response->send();
         }
     }
@@ -134,16 +134,16 @@ class SessionsGateway
             $count = $stmt->rowCount();
 
             if ($count == 0) {
-                $response =  new Response(404, false, null, 'Failed to logout.');
+                $response =  new Response(404, false, null, 'Failed to logout.', false);
                 $response->send();
             }
 
             $data['session_id'] = $session_id;
 
-            $response =  new Response(200, true, $data, 'Successfully logged out.');
+            $response =  new Response(200, true, $data, 'Successfully logged out.', false);
             $response->send();
         } catch (PDOException $e) {
-            $response = new Response(500, false, null, 'There was an error logging out.');
+            $response = new Response(500, false, null, 'There was an error logging out.', false);
             $response->send();
         }
     }
@@ -154,12 +154,12 @@ class SessionsGateway
         $rawData = file_get_contents('php://input');
 
         if (!$jsonData = json_decode($rawData)) {
-            $response = new Response(400, false, null, 'Data not valid JSON.');
+            $response = new Response(400, false, null, 'Data not valid JSON.', false);
             $response->send();
         }
 
         if (!isset($jsonData->refresh_token) || strlen($jsonData->refresh_token) < 1) {
-            $response = new Response(400, false, null, 'Invalid refresh token.');
+            $response = new Response(400, false, null, 'Invalid refresh token.', false);
             $response->send();
         }
 
@@ -179,7 +179,7 @@ class SessionsGateway
             $count = $stmt->rowCount();
 
             if ($count == 0) {
-                $response = new Response(404, false, null, 'Access Token/Refresh Token is incorrect for the given session ID.');
+                $response = new Response(404, false, null, 'Access Token/Refresh Token is incorrect for the given session ID.', false);
                 $response->send();
             }
 
@@ -194,17 +194,17 @@ class SessionsGateway
             $returned_refresh_token_expiry = $row['refresh_token_expiry'];
 
             if (!$returned_status) {
-                $response =  new Response(401, false, null, 'User account is inactive.');
+                $response =  new Response(401, false, null, 'User account is inactive.', false);
                 $response->send();
             }
 
             if ($returned_login_attempts >= 3) {
-                $response =  new Response(401, false, null, 'Account locked due to too many login attempts.');
+                $response =  new Response(401, false, null, 'Account locked due to too many login attempts.', false);
                 $response->send();
             }
 
             if (strtotime($returned_refresh_token_expiry) < time()) {
-                $response =  new Response(401, false, null, 'Refresh token expired. Please login again.');
+                $response =  new Response(401, false, null, 'Refresh token expired. Please login again.', false);
                 $response->send();
             }
 
@@ -233,7 +233,7 @@ class SessionsGateway
             $rowCount = $stmt->rowCount();
 
             if ($rowCount == 0) {
-                $response = new Response(404, false, null, 'Access Token could not be refreshed. Please login again.');
+                $response = new Response(404, false, null, 'Access Token could not be refreshed. Please login again.', false);
             }
 
             $data['session_id'] = $returned_session_id;
@@ -243,10 +243,10 @@ class SessionsGateway
             $data['refresh_token'] = $refresh_token;
             $data['refresh_token_expiry'] = $refresh_token_expiry;
 
-            $response =  new Response(200, true, $data, 'Token refreshed.');
+            $response =  new Response(200, true, $data, 'Token refreshed.', false);
             $response->send();
         } catch (PDOException $e) {
-            $response = new Response(500, false, null, 'There was an error updating the session.' . $e->getMessage());
+            $response = new Response(500, false, null, 'There was an error updating the session.' . $e->getMessage(), false);
             $response->send();
         }
     }
