@@ -4,7 +4,7 @@
  </a>
 </h1>
 
-<p align="justify">Pluto is a hotel management API with a token based authentication system that performs use-case targetted functionalities to manipulate database data to publish available rooms to a channel manager and synchronizes it across all OTA platforms. <br> <span text-align = "center">Built with vanilla <a href="https://www.php.net/" target="_blank">PHP</a>.<span></p>
+<p align="center">Pluto is a hotel management API with a token based authentication system that performs use-case targetted functionalities to manipulate database data to publish available rooms to a channel manager and synchronizes it across all OTA platforms. Built with vanilla <a href="https://www.php.net/" target="_blank">PHP</a>.</p>
 
 <div align="center">
 
