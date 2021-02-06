@@ -1,7 +1,6 @@
-<h1 align="center">
-  <br>
-  <a href="https://www.dropbox.com/s/zgeka1p71rs4j9y/pluto-default-logo.png?raw=true" alt="Pluto"></a>
-</h1>
+<div align="center">
+ ![alt text](https://www.dropbox.com/s/zgeka1p71rs4j9y/pluto-default-logo.png?raw=true)
+</div>
 
 <h4 align="center">Pluto is a hotel management API with a token based authentication system that performs use-case targetted functionalities to manipulate database data to publish available rooms to a channel manager and synchronizes it across all OTA platforms. Built with vanilla <a href="https://www.php.net/" target="_blank">PHP</a>.</h4>
 
