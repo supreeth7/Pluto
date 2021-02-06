@@ -1,7 +1,6 @@
-# Pluto
 <h1 align="center">
   <br>
-  <a href="https://1drv.ms/u/s!Amx-xQjCERyrgZIkcwo5oF-Pg9YvYA?e=ThD2jt?raw=true" alt="Gamet" width="200"></a>
+  <a href="https://y91l7q.ch.files.1drv.com/y4pZOiC3AgLeJwUL4nEvPiVN02bINZI3kmrcGxyUoaqB3P-ro-ljNBGem7PQ9z4RweCB3jz6sTrzfza0fcsiAWzMLzUON1A1YNS0jtS4hxYJo0Gdqw422Kcc1Nt_W3P1z3j8zAR_C_ujUd9YpYuwfayoiLP5wXCD6RCsONyShNRpxGGxXdy0Jy96R5vb-QAxWKRD5lRxvXoxLNzZCnM4paHNw/Pluto.png?psid=1" alt="Pluto"></a>
 </h1>
 
 <h4 align="center">Pluto is a hotel management API with a token based authentication system that performs use-case targetted functionalities to manipulate database data to publish available rooms to a channel manager and synchronizes it across all OTA platforms. Built with vanilla <a href="https://www.php.net/" target="_blank">PHP</a>.</h4>
