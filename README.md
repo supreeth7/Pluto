@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://y91l7q.ch.files.1drv.com/y4pZOiC3AgLeJwUL4nEvPiVN02bINZI3kmrcGxyUoaqB3P-ro-ljNBGem7PQ9z4RweCB3jz6sTrzfza0fcsiAWzMLzUON1A1YNS0jtS4hxYJo0Gdqw422Kcc1Nt_W3P1z3j8zAR_C_ujUd9YpYuwfayoiLP5wXCD6RCsONyShNRpxGGxXdy0Jy96R5vb-QAxWKRD5lRxvXoxLNzZCnM4paHNw/Pluto.png?psid=1" alt="Pluto"></a>
+  <a href="https://www.dropbox.com/s/zgeka1p71rs4j9y/pluto-default-logo.png?raw=true" alt="Pluto"></a>
 </h1>
 
 <h4 align="center">Pluto is a hotel management API with a token based authentication system that performs use-case targetted functionalities to manipulate database data to publish available rooms to a channel manager and synchronizes it across all OTA platforms. Built with vanilla <a href="https://www.php.net/" target="_blank">PHP</a>.</h4>
@@ -20,7 +20,7 @@
 
 ## API Architecture
 
-![alt text](https://y91l7q.ch.files.1drv.com/y4pZOiC3AgLeJwUL4nEvPiVN02bINZI3kmrcGxyUoaqB3P-ro-ljNBGem7PQ9z4RweCB3jz6sTrzfza0fcsiAWzMLzUON1A1YNS0jtS4hxYJo0Gdqw422Kcc1Nt_W3P1z3j8zAR_C_ujUd9YpYuwfayoiLP5wXCD6RCsONyShNRpxGGxXdy0Jy96R5vb-QAxWKRD5lRxvXoxLNzZCnM4paHNw/Pluto.png?psid=1)
+![alt text](https://www.dropbox.com/s/oyd2csndgj0etok/Pluto.png?raw=true)
 
 ## Key Features
 * A full fledged video game e-commerce prototype.
