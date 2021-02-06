@@ -18,7 +18,9 @@
   
 <p align="center">
   <a href="#API Architecture">Architecture</a> •
+  <a href="#Token Based Authentication Flow">Token Based Authentication</a> •
   <a href="#key-features">Key Features</a> •
+  <a href="#Demo">Demo</a> •
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
@@ -31,23 +33,53 @@
 
 
 ## Token Based Authentication Flow
+
 ![alt text](https://www.dropbox.com/s/k711608rf804vms/Token%20Auth.jpg?raw=true)
 
 
 ## Key Features
-* A full fledged video game e-commerce prototype.
+* Robust API developed using only pure PHP.
 * Performs CRUD operations on a MySQL database.
-* Passwords stored are automatically encrypted.
-* Dynamic page rendering.
-* Database operations performed without page refresh via AJAX.
-* Minimal UI.
+* Caching system for faster data retrieval.
+* Token based authentication for security.
+* Industry standard endpoints.
 
+## Demo
+
+#### Create new user
+
+![alt text](https://www.dropbox.com/s/9k17qz48rgi73zu/create_user.gif?raw=true)
+
+<br>
+
+#### Login
+
+![alt text](https://www.dropbox.com/s/rnepbcoma6orjq6/login.gif?raw=true)
+
+<br>
+
+#### Add available room into inventory
+
+![alt text](https://www.dropbox.com/s/11gy9ltbtdpfp53/create_room.gif?raw=true)
+
+<br>
+
+#### Fetch all rooms matching the hotel ID
+
+![alt text](https://www.dropbox.com/s/qo2ipuxazzx7f6h/get_rooms.gif?raw=true)
+
+<br>
+
+#### Logout
+
+![alt text](https://www.dropbox.com/s/l50r4xz6j8lfdzm/logout.gif?raw=true)
+
+<br>
 
 ## Credits
 
-* Icons from [Favicon](https://favicon.io/)
-* Images used dowloaded via [Google Images](https://www.google.com/imghp?hl=en)
-* Bootstrap v4.5.3 [Bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+* API testing done via [Postman](https://www.postman.com)
+* Databased used: [MySQL](https://www.mysql.com/)
 
 ## License
 
