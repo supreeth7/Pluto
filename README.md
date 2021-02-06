@@ -26,16 +26,102 @@
 </p>
 
 </div>
+
 <br>
 
 ## API Architecture
 ![alt text](https://www.dropbox.com/s/oyd2csndgj0etok/Pluto.png?raw=true)
 
+<br>
 
 ## Token Based Authentication Flow
 
 ![alt text](https://www.dropbox.com/s/k711608rf804vms/Token%20Auth.jpg?raw=true)
 
+<br>
+
+## Endpoints
+
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>URI</th>
+<th>Action</th>
+<th>Route Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/rooms</code></td>
+<td>index</td>
+<td>rooms.index</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/users/create</code></td>
+<td>create</td>
+<td>hotels.create</td>
+</tr>
+ <tr>
+<td>POST</td>
+<td><code>/sessions</code></td>
+<td>login</td>
+<td>sessions.create</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/rooms</code></td>
+<td>store</td>
+<td>rooms.create</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/rooms/{id}</code></td>
+<td>show</td>
+<td>rooms.show</td>
+</tr>
+<tr>
+<td>PUT/PATCH</td>
+<td><code>/rooms/{id}</code></td>
+<td>update</td>
+<td>rooms.update</td>
+</tr>
+<tr>
+<td>PUT/PATCH</td>
+<td><code>/sessions/{id}</code></td>
+<td>token refresh</td>
+<td>sessions.update</td>
+</tr>
+<tr>
+<tr>
+<td>GET</td>
+<td><code>/rooms/available</code></td>
+<td>show</td>
+<td>rooms.showAvailable</td>
+</tr>
+<tr>
+ <tr>
+<td>GET</td>
+<td><code>/rooms/unavailable</code></td>
+<td>show</td>
+<td>rooms.showAvailable</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/rooms/{id}</code></td>
+<td>destroy</td>
+<td>rooms.delete</td>
+</tr>
+ <tr>
+<td>DELETE</td>
+<td><code>/sessions/{id}</code></td>
+<td>logout</td>
+<td>sessions.delete</td>
+</tr>
+</tbody>
+</table>
 
 ## Key Features
 * Robust API developed using only pure PHP.
@@ -43,6 +129,8 @@
 * Caching system for faster data retrieval.
 * Token based authentication for security.
 * Industry standard endpoints.
+
+<br>
 
 ## Demo
 
@@ -80,6 +168,8 @@
 
 * API testing done via [Postman](https://www.postman.com)
 * Databased used: [MySQL](https://www.mysql.com/)
+
+<br>
 
 ## License
 
