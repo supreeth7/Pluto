@@ -21,6 +21,7 @@
   <a href="#token-based-authentication-flow">Token Based Authentication</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#Demo">Demo</a> •
+  <a href="#endpoints">Endpoints</a> •
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
