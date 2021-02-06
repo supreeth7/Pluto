@@ -1,5 +1,4 @@
 <h1 align="center">
-  <br>
  <a href="https://gamet-in.000webhostapp.com/">
  <img src="https://ch3301files.storage.live.com/y4mkQK093N58bfSoW28p39Ny4vOYmiAo9Q2dedm9S_IWDw4TTTPaBz5jUxRQDCljckcAXtV1dO3RFnGjBxE_VGQQf0Pm57q06Biu6WncO2SRo_tku29h-Ctu0kbG3Q1bNMhdOnh8Q4qo9DVuZnLgvoF8VzHOh7kZCxNU-Ffzrk8TFM5d625cfyUO_x9ccuK0d-k?width=256&height=256&cropmode=none" alt="Pluto">
  </a>
@@ -10,19 +9,30 @@
 <div align="center">
 
 [![Latest Stable Version](https://poser.pugx.org/phpunit/phpunit/v)](//packagist.org/packages/phpunit/phpunit)
-[![License](https://poser.pugx.org/phpunit/phpunit/license)](//packagist.org/packages/phpunit/phpunit)
+[![License](https://poser.pugx.org/axlon/laravel-postal-code-validation/license)](//packagist.org/packages/axlon/laravel-postal-code-validation)
 
 </div>
 
+<br>
+<div>
+  
 <p align="center">
+  <a href="#API Architecture">Architecture</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
 
-## API Architecture
+</div>
+<br>
 
+## API Architecture
 ![alt text](https://www.dropbox.com/s/oyd2csndgj0etok/Pluto.png?raw=true)
+
+
+## Token Based Authentication Flow
+![alt text](https://www.dropbox.com/s/k711608rf804vms/Token%20Auth.jpg?raw=true)
+
 
 ## Key Features
 * A full fledged video game e-commerce prototype.
