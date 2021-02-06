@@ -129,7 +129,8 @@
 * Robust API developed using only pure PHP.
 * Performs CRUD operations on a MySQL database.
 * Caching system for faster data retrieval.
-* Token based authentication for security.
+* Token based authentication system.
+* Password encryption for security.
 * Industry standard endpoints.
 
 <br>
