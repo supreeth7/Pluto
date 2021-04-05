@@ -1,7 +1,5 @@
 <h1 align="center">
- <a href="https://gamet-in.000webhostapp.com/">
  <img src="https://ch3301files.storage.live.com/y4mkQK093N58bfSoW28p39Ny4vOYmiAo9Q2dedm9S_IWDw4TTTPaBz5jUxRQDCljckcAXtV1dO3RFnGjBxE_VGQQf0Pm57q06Biu6WncO2SRo_tku29h-Ctu0kbG3Q1bNMhdOnh8Q4qo9DVuZnLgvoF8VzHOh7kZCxNU-Ffzrk8TFM5d625cfyUO_x9ccuK0d-k?width=256&height=256&cropmode=none" alt="Pluto">
- </a>
 </h1>
 
 <p align="center">Pluto is a hotel management REST API with a token based authentication system that performs use-case targetted functionalities to manipulate database data to publish available rooms to a channel manager and synchronizes it across all OTA platforms. Built with vanilla <a href="https://www.php.net/" target="_blank">PHP</a>.</p>
